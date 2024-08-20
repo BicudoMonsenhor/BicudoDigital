@@ -27,6 +27,20 @@
                 max-width: 600px;
             }
         }
+        @media (max-width: 767px) {
+            body {
+                padding: 10px;
+                height: auto;
+            }
+            .container {
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .btn-block {
+                width: 100%;
+            }
+        }
         h2 {
             margin-bottom: 20px;
             color: #343a40;
@@ -79,31 +93,7 @@
                 <label for="turma">Selecione a Turma *</label>
                 <select class="form-control" id="turma" required>
                     <option value="" disabled selected>Escolha a turma...</option>
-                    <option value="https://forms.gle/CZnrSYtm2kdSB4w27">6º ano A</option>
-                    <option value="https://forms.gle/qS6FGD2VKh4HNBXJ7">6º ano B</option>
-                    <option value="https://forms.gle/GyFs8y6DgCUTjccR8">6º ano C</option>
-                    <option value="https://forms.gle/9FJTGLdepNJ8enKF6">6º ano D</option>
-                    <option value="https://forms.gle/BnV2HkSEN31y94hr8">7º ano A</option>
-                    <option value="https://forms.gle/GQkctQMHwUReS3dh6">7º ano B</option>
-                    <option value="https://forms.gle/tCQcBuFXvyC6g6mN7">7º ano C</option>
-                    <option value="https://forms.gle/pnfWne6Cuw537FBKA">7º ano D</option>
-                    <option value="https://forms.gle/cyeTxfxxPT8FVMJG9">8º ano A</option>
-                    <option value="https://forms.gle/J4UbmbRe7p86e28w6">8º ano B</option>
-                    <option value="https://forms.gle/LzPvxx9yhQxQMrGA8">8º ano C</option>
-                    <option value="https://forms.gle/2aXE36p7rxTyah9x5">8º ano D</option>
-                    <option value="https://forms.gle/uiALSyZN4FbHDuTt5">9º ano A</option>
-                    <option value="https://forms.gle/TVkXSHXVrHp4pbsB8">9º ano B</option>
-                    <option value="https://forms.gle/7FF5fKfaaBGspRXW9">9º ano C</option>
-                    <option value="https://forms.gle/GpbdtBtzj7J51MnFA">9º ano D</option>
-                    <option value="https://forms.gle/pGJkkiHjGQDE5ebG9">1ª série A</option>
-                    <option value="https://forms.gle/FJ7wXDQ1tsNtgQAEA">1ª série B</option>
-                    <option value="https://forms.gle/L8YpFR5tSwpEYtgAA">1ª série C</option>
-                    <option value="https://forms.gle/ons3KfJo4JXfqTu98">2ª série A</option>
-                    <option value="https://forms.gle/ons3KfJo4JXfqTu98">2ª série B</option>
-                    <option value="https://forms.gle/dEPxMXyJ2fXDLJTg9">3ª série A</option>
-                    <option value="https://forms.gle/sUk85XVvLt27sKPg6">3ª ADM</option>
-                    <option value="https://forms.gle/EzpGptahF2Qtoh3Y8">3ª INF</option>
-                    <option value="https://forms.gle/JZeJtgeTgZAjTn2K9">3ª MKT</option>
+                    <!-- Opções de turmas aqui -->
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Registrar Ocorrência</button>
