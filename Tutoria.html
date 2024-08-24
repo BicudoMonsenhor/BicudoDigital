@@ -149,7 +149,7 @@
             <div class="form-group">
                 <label>Assinatura Digital do Aluno</label>
                 <canvas id="signaturePadAluno" class="signature-pad"></canvas>
-                <button type="button" class="btn btn-secondary mt-2" id="clearSignatureAluno" disabled></button>
+                <button type="button" class="btn btn-secondary mt-2" id="clearSignatureAluno" disabled>Limpar Assinatura</button>
             </div>
             <div class="form-group">
                 <label>Assinatura Digital do Gestor</label>
@@ -158,7 +158,7 @@
             </div>
             <button type="button" class="btn btn-primary" onclick="saveTutoria()">Salvar Tutoria</button>
             <button type="button" class="btn btn-warning" onclick="clearForm()">Limpar Formulário</button>
-            <button type="button" class="btn btn-info" onclick="sendEmail()">Enviar Relatório por E-mail</button>
+            <button type="button" class="btn btn-info" onclick="sendWhatsApp()">Enviar Relatório por WhatsApp</button>
         </form>
 
         <div class="tutoria-list">
@@ -176,6 +176,7 @@
     
     <!-- jsPDF and html2canvas for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     <script>
@@ -454,82 +455,53 @@
 
             const pdf = new jspdf.jsPDF();
             pdf.text(`Tutoria de ${tutoria.nomeAluno}`, 10, 10);
-            pdf.text(`Nome do Pai: ${tutoria.nomePai}`, 10, 20);
-            pdf.text(`Nome da Mãe: ${tutoria.nomeMae}`, 10, 30);
-            pdf.text(`Endereço: ${tutoria.endereco}`, 10, 40);
-            pdf.text(`Celulares: ${tutoria.celulares}`, 10, 50);
-            pdf.text(`Telefone: ${tutoria.telefone}`, 10, 60);
-            pdf.text(`Série: ${tutoria.serie}`, 10, 70);
-            pdf.text(`Nome do Tutor: ${tutoria.nomeTutor}`, 10, 80);
-            pdf.text(`Projeto de Vida: ${tutoria.projetoVida}`, 10, 90);
-            pdf.text(`Assunto Pessoal: ${tutoria.assuntoPessoal}`, 10, 100);
-            pdf.text(`Check Pessoal: ${tutoria.checkPessoal ? 'Sim' : 'Não'}`, 10, 110);
-            pdf.text(`Check Pedagógico: ${tutoria.checkPedagogico ? 'Sim' : 'Não'}`, 10, 120);
-            pdf.text(`Check Família: ${tutoria.checkFamilia ? 'Sim' : 'Não'}`, 10, 130);
-            pdf.text(`Check Emergência: ${tutoria.checkEmergencia ? 'Sim' : 'Não'}`, 10, 140);
-            pdf.text(`Check Prova Paulista: ${tutoria.checkProvaPaulista ? 'Sim' : 'Não'}`, 10, 150);
-            pdf.text(`Check Notas Bimestrais: ${tutoria.checkNotasBimestrais ? 'Sim' : 'Não'}`, 10, 160);
-            pdf.text(`Check Comportamento: ${tutoria.checkComportamento ? 'Sim' : 'Não'}`, 10, 170);
-            pdf.text(`Carimbo do Gestor: ${tutoria.carimboGestor}`, 10, 180);
-            pdf.text(`Data e Hora: ${tutoria.dataHora}`, 10, 190);
 
+            // Cria a estrutura da "planilha"
+            const columns = ["Campo", "Informação"];
+            const rows = [
+                ["Nome do Pai", tutoria.nomePai],
+                ["Nome da Mãe", tutoria.nomeMae],
+                ["Endereço", tutoria.endereco],
+                ["Celulares", tutoria.celulares],
+                ["Telefone", tutoria.telefone],
+                ["Série", tutoria.serie],
+                ["Nome do Tutor", tutoria.nomeTutor],
+                ["Projeto de Vida", tutoria.projetoVida],
+                ["Assunto Pessoal", tutoria.assuntoPessoal],
+                ["Check Pessoal", tutoria.checkPessoal ? 'Sim' : 'Não'],
+                ["Check Pedagógico", tutoria.checkPedagogico ? 'Sim' : 'Não'],
+                ["Check Família", tutoria.checkFamilia ? 'Sim' : 'Não'],
+                ["Check Emergência", tutoria.checkEmergencia ? 'Sim' : 'Não'],
+                ["Check Prova Paulista", tutoria.checkProvaPaulista ? 'Sim' : 'Não'],
+                ["Check Notas Bimestrais", tutoria.checkNotasBimestrais ? 'Sim' : 'Não'],
+                ["Check Comportamento", tutoria.checkComportamento ? 'Sim' : 'Não'],
+                ["Carimbo do Gestor", tutoria.carimboGestor],
+                ["Data e Hora", tutoria.dataHora]
+            ];
+
+            pdf.autoTable(columns, rows, { startY: 20 });
+
+            // Ajusta a posição da assinatura do aluno
             const imgAluno = new Image();
             imgAluno.src = tutoria.assinaturaAluno;
             imgAluno.onload = function () {
-                pdf.addImage(imgAluno, 'PNG', 10, 200, 180, 60);
+                pdf.addImage(imgAluno, 'PNG', 10, pdf.autoTable.previous.finalY + 10, 180, 40);
 
                 const imgGestor = new Image();
                 imgGestor.src = tutoria.assinaturaGestor;
                 imgGestor.onload = function () {
-                    pdf.addImage(imgGestor, 'PNG', 10, 270, 180, 60);
+                    pdf.addImage(imgGestor, 'PNG', 10, pdf.autoTable.previous.finalY + 60, 180, 60);
                     pdf.save(`Tutoria_${tutoria.nomeAluno}.pdf`);
                 };
             };
         }
 
-        // Função para enviar o PDF por e-mail
-        function sendEmail() {
-            let tutorias = JSON.parse(localStorage.getItem('tutorias')) || [];
-            let pdf = new jspdf.jsPDF();
-            
-            tutorias.forEach((tutoria, index) => {
-                pdf.text(`Tutoria de ${tutoria.nomeAluno}`, 10, 10 + (index * 90));
-                pdf.text(`Nome do Pai: ${tutoria.nomePai}`, 10, 20 + (index * 90));
-                pdf.text(`Nome da Mãe: ${tutoria.nomeMae}`, 10, 30 + (index * 90));
-                pdf.text(`Endereço: ${tutoria.endereco}`, 10, 40 + (index * 90));
-                pdf.text(`Celulares: ${tutoria.celulares}`, 10, 50 + (index * 90));
-                pdf.text(`Telefone: ${tutoria.telefone}`, 10, 60 + (index * 90));
-                pdf.text(`Série: ${tutoria.serie}`, 10, 70 + (index * 90));
-                pdf.text(`Nome do Tutor: ${tutoria.nomeTutor}`, 10, 80 + (index * 90));
-                pdf.text(`Projeto de Vida: ${tutoria.projetoVida}`, 10, 90 + (index * 90));
-                pdf.text(`Assunto Pessoal: ${tutoria.assuntoPessoal}`, 10, 100 + (index * 90));
-                pdf.text(`Check Pessoal: ${tutoria.checkPessoal ? 'Sim' : 'Não'}`, 10, 110 + (index * 90));
-                pdf.text(`Check Pedagógico: ${tutoria.checkPedagogico ? 'Sim' : 'Não'}`, 10, 120 + (index * 90));
-                pdf.text(`Check Família: ${tutoria.checkFamilia ? 'Sim' : 'Não'}`, 10, 130 + (index * 90));
-                pdf.text(`Check Emergência: ${tutoria.checkEmergencia ? 'Sim' : 'Não'}`, 10, 140 + (index * 90));
-                pdf.text(`Check Prova Paulista: ${tutoria.checkProvaPaulista ? 'Sim' : 'Não'}`, 10, 150 + (index * 90));
-                pdf.text(`Check Notas Bimestrais: ${tutoria.checkNotasBimestrais ? 'Sim' : 'Não'}`, 10, 160 + (index * 90));
-                pdf.text(`Check Comportamento: ${tutoria.checkComportamento ? 'Sim' : 'Não'}`, 10, 170 + (index * 90));
-                pdf.text(`Carimbo do Gestor: ${tutoria.carimboGestor}`, 10, 180 + (index * 90));
-                pdf.text(`Data e Hora: ${tutoria.dataHora}`, 10, 190 + (index * 90));
-
-                const imgAluno = new Image();
-                imgAluno.src = tutoria.assinaturaAluno;
-                imgAluno.onload = function () {
-                    pdf.addImage(imgAluno, 'PNG', 10, 200 + (index * 90), 180, 60);
-
-                    const imgGestor = new Image();
-                    imgGestor.src = tutoria.assinaturaGestor;
-                    imgGestor.onload = function () {
-                        pdf.addImage(imgGestor, 'PNG', 10, 270 + (index * 90), 180, 60);
-                    };
-                };
-            });
-            
-            const pdfData = pdf.output('datauristring');
-            
-            // Aqui você precisaria de um backend para enviar o e-mail
-            alert("PDF gerado e pronto para ser enviado. Por favor, configure um backend para envio de e-mails.");
+        // Função para enviar o link para o WhatsApp
+        function sendWhatsApp() {
+            const numero = '5511999999999'; // Insira o número do destinatário aqui
+            const mensagem = 'Aqui está o relatório de tutoria. Por favor, anexe o arquivo PDF manualmente.';
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
         }
 
         // Inicializar a lista de tutorias

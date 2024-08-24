@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            background-image: url("12.jpeg"); /* Define a imagem de fundo */
-            background-size: cover; /* Faz com que a imagem cubra todo o fundo */
-            background-position: center; /* Centraliza a imagem no fundo */
-            background-repeat: no-repeat; /* Evita a repetição da imagem */
-            background-attachment: fixed; /* Faz com que a imagem fique fixa ao rolar a página */
-            color: #fff; /* Define a cor do texto como branca para melhor contraste */
+            background-image: url("12.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
         }
 
         .navbar-brand {
@@ -35,10 +35,9 @@
             color: #fff;
             font-weight: bold;
             margin-bottom: 25px;
-            margin-right: 30;
             font-size: 3em;
             animation: glowing 1.5s infinite;
-            text-align: center; /* Centraliza o texto horizontalmente */
+            text-align: center;
         }
 
         @keyframes glowing {
@@ -50,11 +49,11 @@
         p {
             font-size: 1.7em;
             color: #f8f9fa;
-            text-align: center; /* Centraliza o texto horizontalmente */
+            text-align: center;
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente preto */
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -70,6 +69,31 @@
             padding: 10px;
             text-align: center;
             font-size: 1em;
+        }
+
+        #loginModal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loginModal .modal-content {
+            background-color: #343a40;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+            margin: auto;
+            color: #fff;
         }
     </style>
 </head>
@@ -99,6 +123,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="Tutoria.html"><i class="fas fa-book"></i> Tutoria Digital</a>
                         <a class="dropdown-item" href="boletim.html"><i class="fas fa-clipboard-list"></i> Boletim</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i>_Mapa_Sala</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown active">
@@ -121,6 +146,11 @@
                         <i class="fas fa-desktop"></i> Espaços Informática
                     </a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" id="gestaoEscolarLink">
+                        <i class="fas fa-chalkboard-teacher"></i> Gestão Escolar
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -130,7 +160,24 @@
         <p>Portal_Bicudo.sp.gov</p>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Modal de Login -->
+    <div id="loginModal">
+        <div class="modal-content">
+            <h4 class="text-center">Login</h4>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Usuário:</label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </form>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -141,8 +188,51 @@
             document.getElementById('date-time').textContent = dateTimeStr;
         }
 
-        setInterval(updateDateTime, 1000); // Atualiza a data e hora a cada segundo
-        updateDateTime(); // Chama a função imediatamente para exibir a data e hora assim que a página carrega
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Abrir o modal de login ao clicar no link de Gestão Escolar
+        document.getElementById('gestaoEscolarLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('loginModal').style.display = 'flex';
+        });
+
+        // Verificação do login
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Defina o usuário e senha corretos
+            var correctUsername = "admin";
+            var correctPassword = "1234";
+
+            if (username === correctUsername && password === correctPassword) {
+                // Ocultar o modal de login
+                document.getElementById('loginModal').style.display = 'none';
+
+                // Mostrar as subpastas de Gestão Escolar
+                var gestaoEscolarDropdown = document.createElement('div');
+                gestaoEscolarDropdown.className = 'dropdown-menu show';
+                gestaoEscolarDropdown.innerHTML = `
+                    <a class="dropdown-item" href="#"><i class="fas fa-book"></i> Subpasta 1</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Subpasta 2</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Subpasta 3</a>
+                `;
+                document.getElementById('gestaoEscolarLink').parentNode.appendChild(gestaoEscolarDropdown);
+            } else {
+                alert("Usuário ou senha incorretos. Tente novamente.");
+            }
+        });
+
+        // Fechar o modal se clicar fora dele
+        window.onclick = function(event) {
+            var modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
+
