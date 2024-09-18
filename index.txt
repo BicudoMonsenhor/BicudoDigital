@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão-Bicudo</title>
 
-    <!-- Meta tag para palavras-chave -->
-    <meta name="keywords" content="gestão escolar, Monsenhor Bicudo, tutoria digital, boletim escolar, projetos escolares, tecnologia educacional, ocorrências digitais, espaço informática , Pei, Escola Integral">
+     <!-- Meta tag para palavras-chave -->
+     <meta name="keywords" content="gestão escolar, Monsenhor Bicudo, tutoria digital, boletim escolar, projetos escolares, tecnologia educacional, ocorrências digitais, espaço informática , Pei, Escola Integral">
     
-    <!-- Meta tag para descrição (ajuda nos motores de busca) -->
-    <meta name="description" content="Portal de Gestão Escolar da E.E. Monsenhor Bicudo, com tutoria digital, boletim escolar, gestão de professores e tecnologia educacional.">
+     <!-- Meta tag para descrição (ajuda nos motores de busca) -->
+     <meta name="description" content="Portal de Gestão Escolar da E.E. Monsenhor Bicudo, com tutoria digital, boletim escolar, gestão de professores e tecnologia educacional.">
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -78,7 +78,7 @@
             font-size: 1em;
         }
 
-        #loginModal, #loginModalProfessor {
+        #loginModal {
             display: none;
             position: fixed;
             z-index: 9999;
@@ -92,7 +92,7 @@
             align-items: center;
         }
 
-        #loginModal .modal-content, #loginModalProfessor .modal-content {
+        #loginModal .modal-content {
             background-color: #343a40;
             padding: 20px;
             border-radius: 8px;
@@ -123,31 +123,56 @@
                         <i class="fas fa-home"></i> Home
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" id="gestaoProfessorLink">
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-chalkboard-teacher"></i> Gestão Professor
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="Tutoria.html"><i class="fas fa-book"></i> Tutoria Digital</a>
+                        <a class="dropdown-item" href="boletim.html"><i class="fas fa-clipboard-list"></i> Boletim</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i>_Mapa_Sala</a>
+                        <a class="dropdown-item" href="https://onedrive.live.com/?id=root&cid=A1384B1A0DF2CD7A"><i class="fas fa-clipboard-list"></i>_OneDrive</a>
+                        <a class="dropdown-item" href="Ocorrencia.html"><i class="fas fa-clipboard-list"></i>Ocorrência</a>
+                        <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/17ojcO3cHHeimXiXW3mDVBCTSC-Vqp83ta-DtnYI_xzE/edit?gid=1201166039#gid=1201166039"><i class="fas fa-clipboard-list"></i>_Espaço Informática</a>
+          
+                    </div>
+                    
+                    
                 </li>
+
+                
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-laptop-code"></i>Tecnologia
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" href="https://renato2024valente.github.io/Bicudo_Tec_2024/">
+                            <i class="fas fa-code"></i> Projetos
+                        </a>
+                    </div>
+                </li>
+            
+            </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#" id="gestaoEscolarLink">
                         <i class="fas fa-chalkboard-teacher"></i> Gestão Escolar
                     </a>
                 </li>
-                <li class="nav-item active"></li>
+                <li class="nav-item active">
                     <a class="nav-link" href="Galeria.html" id="gestaoEscolarLink">
-                        <i class="fas fa-chalkboard-teacher"></i>Galeria/Construção
+                        <i class="fas fa-chalkboard-teacher"></i>Galeria
                     </a>
                 </li>
-            </ul>
-        </div>
-    </nav>
+                  
+                            </ul>
+        </div>    </nav>
 
     <div class="container mt-4">
         <h1>Bem-vindo! E.E.Monsenhor Bicudo</h1>
         <p>Portal_Bicudo.sp.gov</p>
     </div>
 
-    <!-- Modal de Login para Gestão Escolar -->
+    <!-- Modal de Login -->
     <div id="loginModal">
         <div class="modal-content">
             <h4 class="text-center">Login</h4>
@@ -159,24 +184,6 @@
                 <div class="form-group">
                     <label for="password">Senha:</label>
                     <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal de Login para Gestão Professor -->
-    <div id="loginModalProfessor">
-        <div class="modal-content">
-            <h4 class="text-center">Login Professor</h4>
-            <form id="login-form-professor">
-                <div class="form-group">
-                    <label for="username-professor">Usuário:</label>
-                    <input type="text" class="form-control" id="username-professor" required>
-                </div>
-                <div class="form-group">
-                    <label for="password-professor">Senha:</label>
-                    <input type="password" class="form-control" id="password-professor" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </form>
@@ -202,7 +209,7 @@
             document.getElementById('loginModal').style.display = 'flex';
         });
 
-        // Verificação do login para Gestão Escolar
+        // Verificação do login
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
             var username = document.getElementById('username').value;
@@ -221,7 +228,7 @@
                 gestaoEscolarDropdown.className = 'dropdown-menu show';
                 gestaoEscolarDropdown.innerHTML = `
                     <a class="dropdown-item" href="Ata_Digital.html"><i class="fas fa-book"></i>ATAS_Digitais</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Subpasta 2</a>
+                    <a class="dropdown-item" href=""><i class="fas fa-clipboard-list"></i>Galeria</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Subpasta 3</a>
                 `;
                 document.getElementById('gestaoEscolarLink').parentNode.appendChild(gestaoEscolarDropdown);
@@ -230,56 +237,14 @@
             }
         });
 
-        // Abrir o modal de login ao clicar no link de Gestão Professor
-        document.getElementById('gestaoProfessorLink').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('loginModalProfessor').style.display = 'flex';
-        });
-
-        // Verificação do login para Gestão Professor
-        document.getElementById('login-form-professor').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var username = document.getElementById('username-professor').value;
-            var password = document.getElementById('password-professor').value;
-
-            // Defina o usuário e senha corretos para o professor
-            var correctUsername = "professor";
-            var correctPassword = "bicudo24";
-
-            if (username === correctUsername && password === correctPassword) {
-                // Ocultar o modal de login
-                document.getElementById('loginModalProfessor').style.display = 'none';
-
-                // Mostrar as subpastas de Gestão Professor
-                var gestaoProfessorDropdown = document.createElement('div');
-                gestaoProfessorDropdown.className = 'dropdown-menu show';
-                gestaoProfessorDropdown.innerHTML = `
-                    <a class="dropdown-item" href="Tutoria.html"><i class="fas fa-book"></i> Tutoria Digital</a>
-                    <a class="dropdown-item" href="boletim.html"><i class="fas fa-clipboard-list"></i> Boletim_Online</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Mapa Sala</a>
-                    <a class="dropdown-item" href="Ocorrencia.html"><i class="fas fa-clipboard-list"></i> Ocorrência</a>
-                    <a class="dropdown-item" href="https://onedrive.live.com/?id=root&cid=A1384B1A0DF2CD7A"><i class="fas fa-clipboard-list"></i>One_Drive</a>
-                    <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/17ojcO3cHHeimXiXW3mDVBCTSC-Vqp83ta-DtnYI_xzE/edit?gid=1201166039#gid=1201166039"><i class="fas fa-clipboard-list"></i>Espaço_Informatica</a>
-                    
-                    
-                `;
-                document.getElementById('gestaoProfessorLink').parentNode.appendChild(gestaoProfessorDropdown);
-            } else {
-                alert("Usuário ou senha incorretos. Tente novamente.");
-            }
-        });
-
-        // Fechar o modal se clicar fora dele (para ambos os modais)
+        // Fechar o modal se clicar fora dele
         window.onclick = function(event) {
             var modal = document.getElementById('loginModal');
-            var modalProfessor = document.getElementById('loginModalProfessor');
             if (event.target === modal) {
                 modal.style.display = "none";
-            }
-            if (event.target === modalProfessor) {
-                modalProfessor.style.display = "none";
             }
         }
     </script>
 </body>
 </html>
+
