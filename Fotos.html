@@ -85,6 +85,14 @@
         const gallery = document.getElementById('photo-gallery');
         const correctPassword = '1234'; // Senha para adicionar e apagar fotos
 
+        // Função para carregar fotos do localStorage ao iniciar a página
+        window.onload = function() {
+            const savedPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+            savedPhotos.forEach(photo => {
+                displayPhoto(photo.src, photo.caption);
+            });
+        };
+
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             const photoInput = document.getElementById('photo');
@@ -92,20 +100,21 @@
 
             if (passwordInput === correctPassword) {
                 const files = photoInput.files;
+                let photos = JSON.parse(localStorage.getItem('photos')) || [];
 
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        const photoCard = document.createElement('div');
-                        photoCard.classList.add('photo-card');
-                        photoCard.innerHTML = `
-                            <img src="${e.target.result}" alt="Foto" onclick="toggleFullScreen(this)">
-                            <p class="caption">Clique aqui para adicionar legenda</p>
-                            <button onclick="addCaption(this)">Editar Legenda</button>
-                            <button onclick="deletePhoto(this)">Apagar Foto</button>
-                        `;
-                        gallery.appendChild(photoCard);
+                        const photoData = {
+                            src: e.target.result,
+                            caption: "Clique aqui para adicionar legenda"
+                        };
+                        photos.push(photoData);
+                        displayPhoto(photoData.src, photoData.caption);
+
+                        // Salvar a foto no localStorage
+                        localStorage.setItem('photos', JSON.stringify(photos));
                     };
                     reader.readAsDataURL(file);
                 }
@@ -114,12 +123,27 @@
             }
         });
 
+        function displayPhoto(src, caption) {
+            const photoCard = document.createElement('div');
+            photoCard.classList.add('photo-card');
+            photoCard.innerHTML = `
+                <img src="${src}" alt="Foto" onclick="toggleFullScreen(this)">
+                <p class="caption">${caption}</p>
+                <button onclick="addCaption(this)">Editar Legenda</button>
+                <button onclick="deletePhoto(this)">Apagar Foto</button>
+            `;
+            gallery.appendChild(photoCard);
+        }
+
         function addCaption(button) {
             const password = prompt("Digite a senha para adicionar/editar a legenda:");
             if (password === correctPassword) {
                 const caption = prompt("Digite a legenda:");
                 const captionElement = button.previousElementSibling;
                 captionElement.textContent = caption;
+
+                // Atualizar legenda no localStorage
+                updatePhotoInStorage(captionElement.previousElementSibling.src, caption);
             } else {
                 alert('Senha incorreta!');
             }
@@ -128,10 +152,31 @@
         function deletePhoto(button) {
             const password = prompt("Digite a senha para apagar a foto:");
             if (password === correctPassword) {
-                button.parentElement.remove();
+                const photoCard = button.parentElement;
+                photoCard.remove();
+
+                // Remover do localStorage
+                removePhotoFromStorage(photoCard.querySelector('img').src);
             } else {
                 alert('Senha incorreta!');
             }
+        }
+
+        function updatePhotoInStorage(src, newCaption) {
+            let photos = JSON.parse(localStorage.getItem('photos')) || [];
+            photos = photos.map(photo => {
+                if (photo.src === src) {
+                    return { src: photo.src, caption: newCaption };
+                }
+                return photo;
+            });
+            localStorage.setItem('photos', JSON.stringify(photos));
+        }
+
+        function removePhotoFromStorage(src) {
+            let photos = JSON.parse(localStorage.getItem('photos')) || [];
+            photos = photos.filter(photo => photo.src !== src);
+            localStorage.setItem('photos', JSON.stringify(photos));
         }
 
         function toggleFullScreen(image) {
