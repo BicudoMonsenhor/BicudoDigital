@@ -6,7 +6,7 @@
     <title>Gestão-Bicudo</title>
 
     <!-- Meta tag para palavras-chave -->
-    <meta name="keywords" content="Bicudo, Bicudão,Monsenhor Bicudo, tutoria digital, boletim escolar, projetos escolares, tecnologia educacional, ocorrências digitais, espaço informática , Pei, Escola Integral">
+    <meta name="keywords" content="Bicudo, Bicudão, Monsenhor Bicudo, tutoria digital, boletim escolar, projetos escolares, tecnologia educacional, ocorrências digitais, espaço informática, Pei, Escola Integral">
     <!-- Meta tag para descrição (ajuda nos motores de busca) -->
     <meta name="description" content="Portal de Gestão Escolar da E.E. Monsenhor Bicudo, com tutoria digital, boletim escolar, gestão de professores e tecnologia educacional.">
 
@@ -27,29 +27,12 @@
             font-size: 1.8em;
         }
 
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .navbar-dark .navbar-nav .nav-link:hover {
-            background-color: #5a6268;
-            color: #ffeb3b;
-        }
-
         h1 {
             color: #fff;
             font-weight: bold;
             margin-bottom: 25px;
             font-size: 3em;
-            animation: glowing 1.5s infinite;
             text-align: center;
-        }
-
-        @keyframes glowing {
-            0% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #71a6eb, 0 0 20px #7f9ee2, 0 0 25px #6ea8df, 0 0 30px #88a0f0, 0 0 35px #706ee2; }
-            50% { text-shadow: 0 0 10px #fff, 0 0 20px #081dd8, 0 0 30px #0044ff, 0 0 40px #0004ff, 0 0 50px #4b24f7, 0 0 60px #3643f5, 0 0 70px #4b39ee; }
-            100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #5c87e4, 0 0 20px #6782d8, 0 0 25px #5861e2, 0 0 30px #7c65e4, 0 0 35px #726bdd; }
         }
 
         p {
@@ -63,10 +46,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-link {
-            font-size: 1.1em;
         }
 
         .info-bar {
@@ -101,6 +80,13 @@
             margin: auto;
             color: #fff;
         }
+
+        .toggle-password {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 35px;
+        }
     </style>
 </head>
 <body>
@@ -132,11 +118,6 @@
                         <i class="fas fa-chalkboard-teacher"></i> Gestão Escolar
                     </a>
                 </li>
-                <li class="nav-item active"></li>
-                    <a class="nav-link" href="Fotos.html" id="gestaoEscolarLink">
-                        <i class="fas fa-chalkboard-teacher"></i>Galeria
-                    </a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -155,9 +136,10 @@
                     <label for="username">Usuário:</label>
                     <input type="text" class="form-control" id="username" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="position: relative;">
                     <label for="password">Senha:</label>
                     <input type="password" class="form-control" id="password" required>
+                    <i class="fas fa-eye toggle-password"></i> <!-- Ícone do olho para alternar a visualização da senha -->
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </form>
@@ -173,9 +155,10 @@
                     <label for="username-professor">Usuário:</label>
                     <input type="text" class="form-control" id="username-professor" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="position: relative;">
                     <label for="password-professor">Senha:</label>
                     <input type="password" class="form-control" id="password-professor" required>
+                    <i class="fas fa-eye toggle-password"></i> <!-- Ícone do olho para alternar a visualização da senha -->
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </form>
@@ -207,15 +190,11 @@
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
 
-            // Defina o usuário e senha corretos
             var correctUsername = "admin";
             var correctPassword = "1234";
 
             if (username === correctUsername && password === correctPassword) {
-                // Ocultar o modal de login
                 document.getElementById('loginModal').style.display = 'none';
-
-                // Mostrar as subpastas de Gestão Escolar
                 var gestaoEscolarDropdown = document.createElement('div');
                 gestaoEscolarDropdown.className = 'dropdown-menu show';
                 gestaoEscolarDropdown.innerHTML = `
@@ -241,15 +220,11 @@
             var username = document.getElementById('username-professor').value;
             var password = document.getElementById('password-professor').value;
 
-            // Defina o usuário e senha corretos para o professor
             var correctUsername = "professor";
             var correctPassword = "bicudo24";
 
             if (username === correctUsername && password === correctPassword) {
-                // Ocultar o modal de login
                 document.getElementById('loginModalProfessor').style.display = 'none';
-
-                // Mostrar as subpastas de Gestão Professor
                 var gestaoProfessorDropdown = document.createElement('div');
                 gestaoProfessorDropdown.className = 'dropdown-menu show';
                 gestaoProfessorDropdown.innerHTML = `
@@ -257,15 +232,25 @@
                     <a class="dropdown-item" href="boletim.html"><i class="fas fa-clipboard-list"></i> Boletim_Online</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Mapa Sala</a>
                     <a class="dropdown-item" href="Ocorrencia.html"><i class="fas fa-clipboard-list"></i> Ocorrência</a>
-                    <a class="dropdown-item" href="https://onedrive.live.com/?id=root&cid=A1384B1A0DF2CD7A"><i class="fas fa-clipboard-list"></i>One_Drive</a>
-                    <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/17ojcO3cHHeimXiXW3mDVBCTSC-Vqp83ta-DtnYI_xzE/edit?gid=1201166039#gid=1201166039"><i class="fas fa-clipboard-list"></i>Espaço_Informatica</a>
-                    
-                    
+                    <a class="dropdown-item" href="https://onedrive.live.com/?id=A1384B1A0DF2CD7A%211546&cid=A1384B1A0DF2CD7A"><i class="fas fa-clipboard-list"></i>One_Drive</a>
+                    <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/17ojcO3cHHeimXiXW3mDVBCTSC-Vqp83ta-DtnYI_xzE/edit?usp=sharing"><i class="fas fa-clipboard-list"></i>Espaço_informatica</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> ...</a>
                 `;
                 document.getElementById('gestaoProfessorLink').parentNode.appendChild(gestaoProfessorDropdown);
             } else {
                 alert("Usuário ou senha incorretos. Tente novamente.");
             }
+        });
+
+        // Alternar visualização da senha
+        document.querySelectorAll('.toggle-password').forEach(item => {
+            item.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
         });
 
         // Fechar o modal se clicar fora dele (para ambos os modais)

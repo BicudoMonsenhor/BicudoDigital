@@ -61,6 +61,15 @@
             justify-content: space-between;
             margin-bottom: 10px;
         }
+
+        .student-info {
+            display: flex;
+            gap: 10px;
+        }
+
+        .small-input {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +77,7 @@
         <h1>Tutoria Digital</h1>
         <form id="tutoriaForm">
             <div class="form-group">
-                <label for="nomeFuncionario">Professores e Gestores</label>
+                <label for="nomeFuncionario">TUTOR</label>
                 <select class="form-control" id="nomeFuncionario">
                     <option value="">Selecione...</option>
                     <option value="ALAN JUNIOR BUENO">ALAN JUNIOR BUENO</option>
@@ -107,6 +116,7 @@
                     <option value="MARCIO ENRIQUE STANCKEVIZ">MARCIO ENRIQUE STANCKEVIZ</option>
                     <option value="MARIANA SAKER DE CASTRO PAIVA">MARIANA SAKER DE CASTRO PAIVA</option>
                     <option value="MARIUDA AFFONSO ALVES VAZ">MARIUDA AFFONSO ALVES VAZ</option>
+                    <option value="MATHEUS AUGUSTO SILVA">MATHEUS AUGUSTO SILVA</option>
                     <option value="MILCE FERREIRA DE MOURA">MILCE FERREIRA DE MOURA</option>
                     <option value="MIRIAM BEIRO DE ALMEIDA">MIRIAM BEIRO DE ALMEIDA</option>
                     <option value="NATHÁLIA VERONESE MARTINS">NATHÁLIA VERONESE MARTINS</option>
@@ -121,50 +131,46 @@
                     <option value="SILVIA VALENTIM DAMACENO">SILVIA VALENTIM DAMACENO</option>
                     <option value="SONIA MARIA NABAS DOS SANTOS">SONIA MARIA NABAS DOS SANTOS</option>
                     <option value="SUELI BATISTETTI VICENTE">SUELI BATISTETTI VICENTE</option>
-                    <option value="MATHEUS AUGUSTO SILVA">MATHEUS AUGUSTO SILVA</option>
+                    <option value="SÉRGIO DE OLIVEIRA RODRIGUES">SÉRGIO DE OLIVEIRA RODRIGUES</option>
+                    
+                    <!-- lista continua... -->
                 </select>
             </div>
-            
-            <div class="form-group">
-                <label for="nomeAluno">Nome do Aluno</label>
-                <input type="text" class="form-control" id="nomeAluno" required>
+
+            <!-- Nome do aluno e série juntos -->
+            <div class="student-info">
+                <div class="form-group">
+                    <label for="nomeAluno">Nome do Aluno</label>
+                    <input type="text" class="form-control" id="nomeAluno" required>
+                </div>
+                <div class="form-group small-input">
+                    <label for="serie">Série</label>
+                    <input type="text" class="form-control" id="serie">
+                </div>
             </div>
+
+            <!-- Removido nome do pai, mãe e endereço -->
+
+            <!-- Telefone e celular com opção de adicionar mais números -->
             <div class="form-group">
-                <label for="nomePai">Nome do Pai</label>
-                <input type="text" class="form-control" id="nomePai">
+                <label for="telefoneCelular">Telefone e Celular</label>
+                <div id="telefoneContainer">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="telefoneCelular" placeholder="(XX) XXXX-XXXX / (XX) XXXXX-XXXX">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button" onclick="adicionarNumero()">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="nomeMae">Nome da Mãe</label>
-                <input type="text" class="form-control" id="nomeMae">
-            </div>
-            <div class="form-group">
-                <label for="endereco">Endereço</label>
-                <input type="text" class="form-control" id="endereco">
-            </div>
-            <div class="form-group">
-                <label for="celulares">Celulares</label>
-                <input type="text" class="form-control" id="celulares">
-            </div>
-            <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="text" class="form-control" id="telefone">
-            </div>
-            <div class="form-group">
-                <label for="serie">Série</label>
-                <input type="text" class="form-control" id="serie">
-            </div>
-            <div class="form-group">
-                <label for="nomeTutor">Nome do Tutor</label>
-                <input type="text" class="form-control" id="nomeTutor">
-            </div>
+
+            <!-- Mantido projeto de vida -->
             <div class="form-group">
                 <label for="projetoVida">Projeto de Vida</label>
                 <textarea class="form-control" id="projetoVida" rows="3"></textarea>
             </div>
-            <div class="form-group">
-                <label for="assuntoPessoal">Assunto Pessoal</label>
-                <textarea class="form-control" id="assuntoPessoal" rows="3"></textarea>
-            </div>
+
+            <!-- Checkbox group mantido -->
             <div class="checkbox-group">
                 <div>
                     <input type="checkbox" id="checkPessoal">
@@ -195,6 +201,14 @@
                     <label for="checkComportamento">Comportamento</label>
                 </div>
             </div>
+
+            <!-- Assunto pessoal -->
+            <div class="form-group">
+                <label for="assuntoPessoal">Descrição do Assunto</label>
+                <textarea class="form-control" id="assuntoPessoal" rows="3"></textarea>
+            </div>
+
+            <!-- Mantido resto do formulário -->
             <div class="form-group">
                 <label for="carimboGestor">Carimbo do Prof (1234)</label>
                 <input type="password" class="form-control" id="senhaGestor" placeholder="Digite a senha">
@@ -210,9 +224,9 @@
                 <button type="button" class="btn btn-secondary mt-2" id="clearSignatureAluno" disabled>Limpar Assinatura</button>
             </div>
             <div class="form-group">
-                <label>Assinatura Digital do Gestor</label>
+                <label>.</label>
                 <canvas id="signaturePadGestor" class="signature-pad"></canvas>
-                <button type="button" class="btn btn-secondary mt-2" id="clearSignatureGestor" disabled>Limpar Assinatura</button>
+                <button type="#" class="btn btn-secondary mt-2" id="clearSignatureGestor" disabled></button>
             </div>
             <button type="button" class="btn btn-primary" onclick="saveTutoria()">Salvar Tutoria</button>
             <button type="button" class="btn btn-warning" onclick="clearForm()">Limpar Formulário</button>
@@ -231,13 +245,28 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <!-- jsPDF and html2canvas for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 
     <script>
+        function adicionarNumero() {
+            const container = document.getElementById('telefoneContainer');
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'input-group mb-2';
+            inputGroup.innerHTML = `
+                <input type="text" class="form-control" placeholder="(XX) XXXX-XXXX / (XX) XXXXX-XXXX">
+                <div class="input-group-append">
+                    <button class="btn btn-danger" type="button" onclick="removerNumero(this)">Remover</button>
+                </div>
+            `;
+            container.appendChild(inputGroup);
+        }
+
+        function removerNumero(button) {
+            button.closest('.input-group').remove();
+        }
+
         // Exibir data e hora atual
         function updateDataHora() {
             const now = new Date();
@@ -247,6 +276,7 @@
 
         setInterval(updateDataHora, 1000);
 
+        // Restante do código continua igual...
         // Funções para a assinatura digital
         const canvasAluno = document.getElementById('signaturePadAluno');
         const ctxAluno = canvasAluno.getContext('2d');
@@ -376,13 +406,8 @@
 
             const tutoriaData = {
                 nomeAluno: nomeCompleto,
-                nomePai: document.getElementById('nomePai').value,
-                nomeMae: document.getElementById('nomeMae').value,
-                endereco: document.getElementById('endereco').value,
-                celulares: document.getElementById('celulares').value,
-                telefone: document.getElementById('telefone').value,
+                telefoneCelular: document.getElementById('telefoneCelular').value,
                 serie: serie,
-                nomeTutor: document.getElementById('nomeTutor').value,
                 projetoVida: document.getElementById('projetoVida').value,
                 assuntoPessoal: document.getElementById('assuntoPessoal').value,
                 checkPessoal: document.getElementById('checkPessoal').checked,
@@ -472,13 +497,8 @@
             const tutoria = tutorias[index];
 
             document.getElementById('nomeAluno').value = tutoria.nomeAluno;
-            document.getElementById('nomePai').value = tutoria.nomePai;
-            document.getElementById('nomeMae').value = tutoria.nomeMae;
-            document.getElementById('endereco').value = tutoria.endereco;
-            document.getElementById('celulares').value = tutoria.celulares;
-            document.getElementById('telefone').value = tutoria.telefone;
+            document.getElementById('telefoneCelular').value = tutoria.telefoneCelular;
             document.getElementById('serie').value = tutoria.serie;
-            document.getElementById('nomeTutor').value = tutoria.nomeTutor;
             document.getElementById('projetoVida').value = tutoria.projetoVida;
             document.getElementById('assuntoPessoal').value = tutoria.assuntoPessoal;
             document.getElementById('checkPessoal').checked = tutoria.checkPessoal;
@@ -517,13 +537,8 @@
             // Cria a estrutura da "planilha"
             const columns = ["Campo", "Informação"];
             const rows = [
-                ["Nome do Pai", tutoria.nomePai],
-                ["Nome da Mãe", tutoria.nomeMae],
-                ["Endereço", tutoria.endereco],
-                ["Celulares", tutoria.celulares],
-                ["Telefone", tutoria.telefone],
+                ["Telefone/Celular", tutoria.telefoneCelular],
                 ["Série", tutoria.serie],
-                ["Nome do Tutor", tutoria.nomeTutor],
                 ["Projeto de Vida", tutoria.projetoVida],
                 ["Assunto Pessoal", tutoria.assuntoPessoal],
                 ["Check Pessoal", tutoria.checkPessoal ? 'Sim' : 'Não'],
@@ -556,7 +571,7 @@
 
         // Função para enviar o link para o WhatsApp
         function sendWhatsApp() {
-            const numero = '5511999999999'; // Insira o número do destinatário aqui
+            const numero = '14996002310'; // Insira o número do destinatário aqui
             const mensagem = 'Aqui está o relatório de tutoria. Por favor, anexe o arquivo PDF manualmente.';
             const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
@@ -565,5 +580,5 @@
         // Inicializar a lista de tutorias
         renderTutoriaList();
     </script>
-</body>
-</html>
+    </body>
+    </html>
