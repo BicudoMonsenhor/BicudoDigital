@@ -27,6 +27,11 @@
             background-color: #007bff;
             border-color: #007bff;
         }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            margin-top: 15px;
+        }
         .school-header {
             text-align: center;
             margin-bottom: 20px;
@@ -45,6 +50,12 @@
             margin-bottom: 30px;
             font-weight: bold;
             color: #007bff;
+        }
+        .occurrence-summary {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -65,35 +76,46 @@
                 <label for="turma">Selecione a Turma *</label>
                 <select class="form-control" id="turma" required>
                     <option value="" disabled selected>Escolha a turma...</option>
-                    <option value="https://forms.gle/CZnrSYtm2kdSB4w27">6º ano A</option>
-                    <option value="https://forms.gle/qS6FGD2VKh4HNBXJ7">6º ano B</option>
-                    <option value="https://forms.gle/GyFs8y6DgCUTjccR8">6º ano C</option>
-                    <option value="https://forms.gle/9FJTGLdepNJ8enKF6">6º ano D</option>
-                    <option value="https://forms.gle/BnV2HkSEN31y94hr8">7º ano A</option>
-                    <option value="https://forms.gle/GQkctQMHwUReS3dh6">7º ano B</option>
-                    <option value="https://forms.gle/tCQcBuFXvyC6g6mN7">7º ano C</option>
-                    <option value="https://forms.gle/pnfWne6Cuw537FBKA">7º ano D</option>
-                    <option value="https://forms.gle/cyeTxfxxPT8FVMJG9">8º ano A</option>
-                    <option value="https://forms.gle/J4UbmbRe7p86e28w6">8º ano B</option>
-                    <option value="https://forms.gle/LzPvxx9yhQxQMrGA8">8º ano C</option>
-                    <option value="https://forms.gle/2aXE36p7rxTyah9x5">8º ano D</option>
-                    <option value="https://forms.gle/uiALSyZN4FbHDuTt5">9º ano A</option>
-                    <option value="https://forms.gle/TVkXSHXVrHp4pbsB8">9º ano B</option>
-                    <option value="https://forms.gle/7FF5fKfaaBGspRXW9">9º ano C</option>
-                    <option value="https://forms.gle/GpbdtBtzj7J51MnFA">9º ano D</option>
-                    <option value="https://forms.gle/pGJkkiHjGQDE5ebG9">1ª série A</option>
-                    <option value="https://forms.gle/FJ7wXDQ1tsNtgQAEA">1ª série B</option>
-                    <option value="https://forms.gle/L8YpFR5tSwpEYtgAA">1ª série C</option>
-                    <option value="https://forms.gle/ons3KfJo4JXfqTu98">2ª série A</option>
-                    <option value="https://forms.gle/ons3KfJo4JXfqTu98">2ª série B</option>
-                    <option value="https://forms.gle/dEPxMXyJ2fXDLJTg9">3ª série A</option>
-                    <option value="https://forms.gle/sUk85XVvLt27sKPg6">3ª ADM</option>
-                    <option value="https://forms.gle/EzpGptahF2Qtoh3Y8">3ª INF</option>
-                    <option value="https://forms.gle/JZeJtgeTgZAjTn2K9">3ª MKT</option>
+                    <option value="6º ano A|https://forms.gle/CZnrSYtm2kdSB4w27">6º ano A</option>
+                    <option value="6º ano B|https://forms.gle/qS6FGD2VKh4HNBXJ7">6º ano B</option>
+                    <option value="6º ano C|https://forms.gle/GyFs8y6DgCUTjccR8">6º ano C</option>
+                    <option value="6º ano D|https://forms.gle/9FJTGLdepNJ8enKF6">6º ano D</option>
+                    <option value="7º ano A|https://forms.gle/BnV2HkSEN31y94hr8">7º ano A</option>
+                    <option value="7º ano B|https://forms.gle/GQkctQMHwUReS3dh6">7º ano B</option>
+                    <option value="7º ano C|https://forms.gle/tCQcBuFXvyC6g6mN7">7º ano C</option>
+                    <option value="7º ano D|https://forms.gle/pnfWne6Cuw537FBKA">7º ano D</option>
+                    <option value="8º ano A|https://forms.gle/cyeTxfxxPT8FVMJG9">8º ano A</option>
+                    <option value="8º ano B|https://forms.gle/J4UbmbRe7p86e28w6">8º ano B</option>
+                    <option value="8º ano C|https://forms.gle/LzPvxx9yhQxQMrGA8">8º ano C</option>
+                    <option value="8º ano D|https://forms.gle/2aXE36p7rxTyah9x5">8º ano D</option>
+                    <option value="9º ano A|https://forms.gle/uiALSyZN4FbHDuTt5">9º ano A</option>
+                    <option value="9º ano B|https://forms.gle/TVkXSHXVrHp4pbsB8">9º ano B</option>
+                    <option value="9º ano C|https://forms.gle/7FF5fKfaaBGspRXW9">9º ano C</option>
+                    <option value="9º ano D|https://forms.gle/GpbdtBtzj7J51MnFA">9º ano D</option>
+                    <option value="1ª série A|https://forms.gle/pGJkkiHjGQDE5ebG9">1ª série A</option>
+                    <option value="1ª série B|https://forms.gle/FJ7wXDQ1tsNtgQAEA">1ª série B</option>
+                    <option value="1ª série C|https://forms.gle/L8YpFR5tSwpEYtgAA">1ª série C</option>
+                    <option value="2ª série A|https://forms.gle/ons3KfJo4JXfqTu98">2ª série A</option>
+                    <option value="2ª série B|https://forms.gle/ons3KfJo4JXfqTu98">2ª série B</option>
+                    <option value="3ª série A|https://forms.gle/dEPxMXyJ2fXDLJTg9">3ª série A</option>
+                    <option value="3ª ADM|https://forms.gle/sUk85XVvLt27sKPg6">3ª ADM</option>
+                    <option value="3ª INF|https://forms.gle/EzpGptahF2Qtoh3Y8">3ª INF</option>
+                    <option value="3ª MKT|https://forms.gle/JZeJtgeTgZAjTn2K9">3ª MKT</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="assunto">Assunto da Ocorrência *</label>
+                <input type="text" class="form-control" id="assunto" required placeholder="Descreva o assunto da ocorrência">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Registrar Ocorrência</button>
         </form>
+
+        <div class="occurrence-summary" id="occurrence-summary">
+            <h4>Resumo de Ocorrências</h4>
+            <p id="total-occurrences">Total de Ocorrências: 0</p>
+            <ul id="occurrence-list"></ul>
+            <button id="clear-history" class="btn btn-danger btn-block">Apagar Histórico</button>
+        </div>
     </div>
 
     <script>
@@ -106,20 +128,68 @@
             document.getElementById('current-time').textContent = now.toLocaleTimeString('pt-BR', timeOptions);
         }
 
+        // Carregar as ocorrências salvas
+        function loadOccurrences() {
+            const occurrences = JSON.parse(localStorage.getItem('occurrences')) || [];
+            return occurrences;
+        }
+
+        // Salvar a nova ocorrência no localStorage
+        function saveOccurrence(turma, assunto, link) {
+            const occurrences = loadOccurrences();
+            occurrences.push({ turma, assunto, link, timestamp: new Date().toLocaleString('pt-BR') });
+            localStorage.setItem('occurrences', JSON.stringify(occurrences));
+        }
+
+        // Exibir o resumo de ocorrências
+        function displayOccurrences() {
+            const occurrences = loadOccurrences();
+            const occurrenceList = document.getElementById('occurrence-list');
+            const totalOccurrences = document.getElementById('total-occurrences');
+
+            occurrenceList.innerHTML = '';
+            occurrences.forEach((occurrence, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${index + 1}. Turma: ${occurrence.turma}, Assunto: ${occurrence.assunto}, 
+                Data: ${occurrence.timestamp} <br> <a href="${occurrence.link}" target="_blank">Link do Forms</a>`;
+                occurrenceList.appendChild(listItem);
+            });
+
+            totalOccurrences.textContent = `Total de Ocorrências: ${occurrences.length}`;
+        }
+
+        // Atualizar data e hora
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Enviar o formulário e registrar a ocorrência
         document.getElementById('occurrence-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            const selectedTurma = document.getElementById('turma').value;
-            if (selectedTurma) {
-                window.open(selectedTurma, '_blank');
+            const turmaValue = document.getElementById('turma').value.split('|');
+            const turma = turmaValue[0];
+            const link = turmaValue[1];
+            const assunto = document.getElementById('assunto').value;
+
+            if (turma && assunto && link) {
+                saveOccurrence(turma, assunto, link);
+                displayOccurrences();
+                alert('Ocorrência registrada com sucesso!');
             } else {
-                alert('Por favor, selecione uma turma.');
+                alert('Por favor, preencha todos os campos.');
             }
         });
 
-        // Update date and time on page load
-        updateDateTime();
-        // Update time every second
-        setInterval(updateDateTime, 1000);
+        // Apagar histórico de ocorrências
+        document.getElementById('clear-history').addEventListener('click', function() {
+            if (confirm('Tem certeza que deseja apagar todo o histórico de ocorrências?')) {
+                localStorage.removeItem('occurrences');
+                displayOccurrences(); // Atualizar a exibição após limpar
+                alert('Histórico apagado com sucesso!');
+            }
+        });
+
+        // Mostrar as ocorrências quando a página carregar
+        displayOccurrences();
     </script>
 </body>
 </html>
