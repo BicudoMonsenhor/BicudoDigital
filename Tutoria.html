@@ -45,7 +45,6 @@
             width: 100%;
             height: 200px;
             cursor: crosshair;
-            display: none;
         }
 
         button {
@@ -132,8 +131,6 @@
                     <option value="SONIA MARIA NABAS DOS SANTOS">SONIA MARIA NABAS DOS SANTOS</option>
                     <option value="SUELI BATISTETTI VICENTE">SUELI BATISTETTI VICENTE</option>
                     <option value="SÉRGIO DE OLIVEIRA RODRIGUES">SÉRGIO DE OLIVEIRA RODRIGUES</option>
-                    
-                    <!-- lista continua... -->
                 </select>
             </div>
 
@@ -221,12 +218,7 @@
             <div class="form-group">
                 <label>Assinatura Digital do Aluno</label>
                 <canvas id="signaturePadAluno" class="signature-pad"></canvas>
-                <button type="button" class="btn btn-secondary mt-2" id="clearSignatureAluno" disabled>Limpar Assinatura</button>
-            </div>
-            <div class="form-group">
-                <label>.</label>
-                <canvas id="signaturePadGestor" class="signature-pad"></canvas>
-                <button type="#" class="btn btn-secondary mt-2" id="clearSignatureGestor" disabled></button>
+                <button type="button" class="btn btn-secondary mt-2" id="clearSignatureAluno">Limpar Assinatura do Aluno</button>
             </div>
             <button type="button" class="btn btn-primary" onclick="saveTutoria()">Salvar Tutoria</button>
             <button type="button" class="btn btn-warning" onclick="clearForm()">Limpar Formulário</button>
@@ -247,7 +239,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
-
 
     <script>
         function adicionarNumero() {
@@ -276,15 +267,10 @@
 
         setInterval(updateDataHora, 1000);
 
-        // Restante do código continua igual...
         // Funções para a assinatura digital
         const canvasAluno = document.getElementById('signaturePadAluno');
         const ctxAluno = canvasAluno.getContext('2d');
         let drawingAluno = false;
-
-        const canvasGestor = document.getElementById('signaturePadGestor');
-        const ctxGestor = canvasGestor.getContext('2d');
-        let drawingGestor = false;
 
         function getMousePos(event, canvas) {
             const rect = canvas.getBoundingClientRect();
@@ -309,7 +295,6 @@
 
         function endPosition(ctx) {
             drawingAluno = false;
-            drawingGestor = false;
             ctx.beginPath();
         }
 
@@ -344,21 +329,8 @@
         canvasAluno.addEventListener('touchend', () => endPosition(ctxAluno));
         canvasAluno.addEventListener('touchmove', (e) => draw(e, ctxAluno, canvasAluno, drawingAluno));
 
-        // Eventos para mouse e touch - Gestor
-        canvasGestor.addEventListener('mousedown', (e) => startPosition(e, ctxGestor, canvasGestor, drawingGestor = true));
-        canvasGestor.addEventListener('mouseup', () => endPosition(ctxGestor));
-        canvasGestor.addEventListener('mousemove', (e) => draw(e, ctxGestor, canvasGestor, drawingGestor));
-
-        canvasGestor.addEventListener('touchstart', (e) => startPosition(e, ctxGestor, canvasGestor, drawingGestor = true));
-        canvasGestor.addEventListener('touchend', () => endPosition(ctxGestor));
-        canvasGestor.addEventListener('touchmove', (e) => draw(e, ctxGestor, canvasGestor, drawingGestor));
-
         document.getElementById('clearSignatureAluno').addEventListener('click', () => {
             ctxAluno.clearRect(0, 0, canvasAluno.width, canvasAluno.height);
-        });
-
-        document.getElementById('clearSignatureGestor').addEventListener('click', () => {
-            ctxGestor.clearRect(0, 0, canvasGestor.width, canvasGestor.height);
         });
 
         // Verificar se a senha do gestor está correta para desbloquear o campo de carimbo e assinatura
@@ -366,37 +338,10 @@
             const senha = this.value;
             if (senha === "1234") {
                 document.getElementById('carimboGestor').disabled = false;
-                document.getElementById('signaturePadGestor').style.display = 'block';
-                document.getElementById('clearSignatureGestor').disabled = false;
             } else {
                 document.getElementById('carimboGestor').disabled = true;
-                document.getElementById('signaturePadGestor').style.display = 'none';
-                document.getElementById('clearSignatureGestor').disabled = true;
             }
         });
-
-        // Função para verificar mínimo de tutorias
-        function checkMinimumTutorias() {
-            let tutorias = JSON.parse(localStorage.getItem('tutorias')) || [];
-            let alunoTutorias = {};
-
-            tutorias.forEach(tutoria => {
-                if (!alunoTutorias[tutoria.nomeAluno]) {
-                    alunoTutorias[tutoria.nomeAluno] = 1;
-                } else {
-                    alunoTutorias[tutoria.nomeAluno]++;
-                }
-            });
-
-            for (const aluno in alunoTutorias) {
-                if (alunoTutorias[aluno] < 2) {
-                    alert(`O aluno ${aluno} possui menos de duas tutorias!`);
-                    return false;
-                }
-            }
-
-            return true;
-        }
 
         // Função para salvar uma tutoria
         function saveTutoria() {
@@ -419,13 +364,10 @@
                 checkComportamento: document.getElementById('checkComportamento').checked,
                 carimboGestor: document.getElementById('carimboGestor').value,
                 dataHora: document.getElementById('dataHora').innerText,
-                assinaturaAluno: canvasAluno.toDataURL(),
-                assinaturaGestor: canvasGestor.toDataURL()
+                assinaturaAluno: canvasAluno.toDataURL()
             };
 
             let tutorias = JSON.parse(localStorage.getItem('tutorias')) || [];
-
-            // Adiciona a nova tutoria ao array de tutorias
             tutorias.push(tutoriaData);
             localStorage.setItem('tutorias', JSON.stringify(tutorias));
 
@@ -437,7 +379,6 @@
         function clearForm() {
             document.getElementById('tutoriaForm').reset();
             ctxAluno.clearRect(0, 0, canvasAluno.width, canvasAluno.height);
-            ctxGestor.clearRect(0, 0, canvasGestor.width, canvasGestor.height);
         }
 
         // Função para renderizar a lista de tutorias
@@ -517,13 +458,6 @@
                 ctxAluno.clearRect(0, 0, canvasAluno.width, canvasAluno.height);
                 ctxAluno.drawImage(imgAluno, 0, 0);
             };
-
-            const imgGestor = new Image();
-            imgGestor.src = tutoria.assinaturaGestor;
-            imgGestor.onload = function () {
-                ctxGestor.clearRect(0, 0, canvasGestor.width, canvasGestor.height);
-                ctxGestor.drawImage(imgGestor, 0, 0);
-            };
         }
 
         // Função para salvar uma tutoria como PDF
@@ -559,13 +493,7 @@
             imgAluno.src = tutoria.assinaturaAluno;
             imgAluno.onload = function () {
                 pdf.addImage(imgAluno, 'PNG', 10, pdf.autoTable.previous.finalY + 10, 180, 40);
-
-                const imgGestor = new Image();
-                imgGestor.src = tutoria.assinaturaGestor;
-                imgGestor.onload = function () {
-                    pdf.addImage(imgGestor, 'PNG', 10, pdf.autoTable.previous.finalY + 60, 180, 60);
-                    pdf.save(`Tutoria_${tutoria.nomeAluno}.pdf`);
-                };
+                pdf.save(`Tutoria_${tutoria.nomeAluno}.pdf`);
             };
         }
 
@@ -580,5 +508,5 @@
         // Inicializar a lista de tutorias
         renderTutoriaList();
     </script>
-    </body>
-    </html>
+</body>
+</html>
