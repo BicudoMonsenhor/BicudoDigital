@@ -21,7 +21,25 @@
             background-attachment: fixed;
             color: #fff;
         }
-
+        .ATENÇÃO  {
+            color: yellow;
+            font-weight: bold; /* Deixa o texto em negrito */
+            animation: blink 1s infinite; /* Animação de piscar */
+        }
+        
+        /* Animação para o piscar */
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
         .navbar-brand {
             font-weight: bold;
             font-size: 1.8em;
@@ -118,6 +136,13 @@
                         <i class="fas fa-chalkboard-teacher"></i> Gestão Escolar
                     </a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="Celular.html" id="gestaoEscolarLink">
+                        <i class="fas fa-chalkboard-teacher"></i> <span class="ATENÇÃO">! ATENÇÃO ! </span>  
+                    
+                    </a>
+                </li>
+                
             </ul>
         </div>
     </nav>
@@ -190,15 +215,15 @@
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
 
-            var correctUsername = "admin";
-            var correctPassword = "1234";
+            var correctUsername = "gestao";
+            var correctPassword = "bicudo2025##";
 
             if (username === correctUsername && password === correctPassword) {
                 document.getElementById('loginModal').style.display = 'none';
                 var gestaoEscolarDropdown = document.createElement('div');
                 gestaoEscolarDropdown.className = 'dropdown-menu show';
                 gestaoEscolarDropdown.innerHTML = `
-                    <a class="dropdown-item" href="Ata_Digital.html"><i class="fas fa-book"></i>ATAS_Digitais</a>
+                    <a class="dropdown-item" href="https://bicudomonsenhor.github.io/Tutoriavotosbicudo2025/"><i class="fas fa-book"></i>Tutoria-Votos</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Subpasta 2</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Subpasta 3</a>
                 `;
@@ -221,7 +246,7 @@
             var password = document.getElementById('password-professor').value;
 
             var correctUsername = "professor";
-            var correctPassword = "bicudo24";
+            var correctPassword = "@bicudo25";
 
             if (username === correctUsername && password === correctPassword) {
                 document.getElementById('loginModalProfessor').style.display = 'none';
@@ -233,6 +258,9 @@
                     <a class="dropdown-item" href="https://onedrive.live.com/?id=A1384B1A0DF2CD7A%211546&cid=A1384B1A0DF2CD7A"><i class="fas fa-clipboard-list"></i>One_Drive</a>
                     <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/17ojcO3cHHeimXiXW3mDVBCTSC-Vqp83ta-DtnYI_xzE/edit?usp=sharing"><i class="fas fa-clipboard-list"></i>Espaço_informatica</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Mapa Sala/Ds</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Mapa Sala/Ds</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i>...</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i>...</a>
                                
                   
                 `;

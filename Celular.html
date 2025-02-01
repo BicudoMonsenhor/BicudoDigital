@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atenção: Proibição de Celulares nas Escolas Públicas</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 28;
+            color: #fffffc;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            background-image: url('12.jpeg');
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .alert {
+            background-color: #ff4c4c;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(41, 123, 201, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .alert h2 {
+            margin-bottom: 10px;
+        }
+
+        .law-text {
+            font-size: 20px;
+            margin-top: 20px;
+            line-height: 1.5;
+            font-weight: bold;
+            background-color: rgba(10, 8, 0, 0.5); /* Faixa amarela translúcida */
+            padding: 20px; /* Espaçamento dentro da faixa */
+            border-radius: 8px; /* Bordas arredondadas */
+            width: fit-content; /* Ajusta a largura à quantidade de texto */
+            margin: 10px auto; /* Centraliza na página */
+        }
+
+        .highlight {
+            color: #ff0000;
+            font-size: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .button {
+            background-color: #00aaff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0077cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="alert">
+            <h2>ATENÇÃO!</h2>
+            <p>Lei proíbe o uso de celulares em escolas públicas.</p>
+            <img src="Proibido.jpg" alt="">
+        </div>
+        
+        <!-- Primeira explicação sobre a Lei com faixa de fundo translúcida -->
+        <h4 class="law-text">
+            De acordo com a <span class="highlight">Lei nº 15.100-2025</span>, que restringe o uso de celulares e outros aparelhos eletrônicos portáteis nas escolas públicas e privadas de educação básica em todo o Brasil. 
+            WWW12.SENADO.LEG.BR
+        </h4>
+
+        <!-- Segunda explicação sobre a Lei com faixa de fundo translúcida -->
+        <h4 class="law-text">
+            O objetivo da lei é proteger a saúde mental, física e psíquica de crianças e adolescentes, promovendo um ambiente escolar mais focado e saudável.
+        </h4>
+
+        <button class="button" onclick="window.location.href = 'https://www.jusbrasil.com.br'">Saiba Mais sobre a Lei</button>
+    </div>
+</body>
+</html>
